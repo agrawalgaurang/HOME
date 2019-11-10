@@ -1,0 +1,707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>CODECHEF  - Problems</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="programming, language, algorithm, contest, contester, Java, C#, Pascal, C, C++, python, ruby, caml, ocaml, perl, haskell, lisp, prolog, fortran, assembler, asembler, functional, online, judge, problem, problemset, ACM">
+
+<meta name="description" content="Improve your programming skills through practice problems. Get points, move up the ranks, and prepare yourself for our competitions.">
+
+<link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="/rss/" rel="alternate" type="application/rss+xml" title="RSS Feed">
+<style type="text/css">
+	@import url(/images/style.css);
+</style>
+
+<!--[if IE]>
+	<style type="text/css">
+		@import url(/images/ddsmoothmenu-ie.css);
+	</style>
+<![endif]-->
+
+<script type="text/javascript" language="javascript">
+function UnCryptMailto(s) {
+	var n=0;
+	var r="";
+	for(var i=0;i<s.length;i++) {		
+		n=s.charCodeAt(i); 
+		if (n>=8364) {n = 128;}
+		r += String.fromCharCode(n+(2));	
+	}
+	return r;
+}
+function linkTo_UnCryptMailto(s)	{
+	location.href=UnCryptMailto(s);
+}
+</script>
+<script type="text/javascript" src="/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="/images/ddsmoothmenu.css" />
+
+<!--[if lte IE 7]>
+
+<style type="text/css">
+html .ddsmoothmenu{height: 1%;} /*Holly Hack for IE7 and below*/
+</style>
+
+<![endif]-->
+
+<script type="text/javascript" src="/ddsmoothmenu.js"></script>
+<script type="text/javascript" src="https://www.codechef.com/em/libs/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://www.codechef.com/em/libs/showdown/showdown-1.8.6.min.js"></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+      },
+      ShowMathMenu: false,
+      TeX: {
+        extensions: ["color.js"],
+        noUndefined: {
+          attributes: {
+            mathcolor: "red",
+            mathbackground: "#FFEEEE",
+            mathsize: "90%"
+          }
+        },
+        Macros: { href: "{}" }
+      },
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+        multiline: true,
+        processEscapes: true,
+        ignoreClass: "[a-zA-Z1-9]*",
+        processClass: "mathjax-support"
+      },
+      menuSettings: {
+        context: "Browser"
+      },
+      messageStyle: "none"
+    });
+</script>
+
+<script>
+    /*
+        Markdown support helper functions start.
+        Referred https://github.com/karoldvl/meltdown-pl/commit/cc6c91e6559cb1c457bf5d59fcf1b50c2ffd7810
+        This regex makes sure that markdown is not parsed inside the mathjax/latex tags.
+        e.g. Suppose the content was $a_b$, then '_' shouldn't be assumed a markdown token,
+        Otherwise, it will be treated as italics.
+    */
+    var _EscapeMathJax = function(str) {
+        if (str) {
+            return str.replace(/([-\\`*_{}[\]()#+.!])/g, '\\$1');
+        }
+    }
+
+/*
+        We consider a statement to be markdown if it doesn't contain
+        any of the tags: <b>, <p>, <ul>, <li> and <br>.
+        This makes an assumption that in the older problem statements,
+        we have at least one such tag. If this is not true, the formatting
+        of those statements will be broken.
+    */
+    var isMarkdownString = function(str) {
+        var isHtml = /<b.*>(.*?)<\/b>/.test(str)
+            ||  /<p.*>(.*?)<\/p>/.test(str)
+            ||  /<ul.*>(.*?)<\/ul>/.test(str)
+            ||  /<li.*>(.*?)<\/li>/.test(str)
+            ||  /<br.*>(.*?)/.test(str)
+            ||  /(.*?)<\/br>/.test(str);
+
+        return !isHtml;
+    }
+
+    function processMarkdown() {
+        var text = $("#problem-statement").html();          
+      
+      // If the statement is not in markdown, do nothing.
+      if (!text || !isMarkdownString(text)) {
+          return;
+      }
+
+      // MathJax support: Escape Markdown special characters
+      text = text.replace(/~/g,"~T");
+      text = text.replace(/\$\$([^]*?)\$\$/g, _EscapeMathJax);
+      text = text.replace(/\$([^]*?)\$/g, _EscapeMathJax);
+      
+      // Convert the text to markdown.
+      var converter = new showdown.Converter();
+      text = converter.makeHtml(text);
+
+      $("#problem-statement").html(text);
+    }
+
+    function processMathJax(times) {
+      if (times > 10) {
+        return;
+      }
+      var elem = document.getElementById('problem-statement');
+      if (elem) {
+        // If the element mathjax-support is already present, don't reprocess mathjax.
+        if (!elem.classList.contains("mathjax-support")) {
+          elem.className += " mathjax-support";
+        } else {
+          return;
+        }
+        var descendants = elem.querySelectorAll("*");
+        descendants.forEach(function(descendant) {
+          if (!descendant.classList.contains("mathjax-support")) {
+            descendant.className += " mathjax-support";
+          }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+      } else {
+        window.setTimeout(function() {
+          processMathJax(times + 1)
+        }, 300);
+      }
+    }
+
+    function processMathjaxAndMarkdown() {
+      processMarkdown();
+      processMathJax(1);
+    }
+	
+</script>
+
+
+</head>
+<body onload="processMathjaxAndMarkdown()">
+<div class="page-wrapper">
+<div style="display:none;">
+	<img src="/images/nav-awrrow-ahover.gif" />
+	<img src="/images/arrow-down-small.gif" />
+</div>
+<!-- HEADER -->
+<div id="header" class="wrapper">
+	<div class="inner-wrapper">
+
+		<!-- LOGO -->
+		<div id="site-logo" class="cols-2">
+			<strong><a href="/">CodeChef: CODECHEF</a></strong>
+		</div>
+		<!-- /LOGO -->
+
+		<!-- COLS 2 -->
+		<div class="cols-2" style="position: static;">
+
+			<!-- CUSTOM LOGIN -->
+			<div id="custom-login">
+
+									<div class="user-logged-in">
+						Hello <strong>lirachawla</strong>, Check your <strong><a href="/users/lirachawla/">Account</a></strong> or <a href="/logout">Log Out</a>.
+					</div>
+				
+				<!-- MISC LINKS -->
+				<div id="misc-links">
+												</div>
+				<!-- /MISC LINKS -->
+			</div>
+			<!-- /CUSTOM LOGIN -->
+
+						<!-- PRIMARY NAV -->
+			<div id="smoothmenu1" class="ddsmoothmenu">
+				<ul>
+					<li class="bignav" id="practice-nav"> 
+						<a href="/problems/easy/">PRACTICE</a>
+						<ul>
+						  <li><a href="/problems/easy/">Easy</a></li>
+						  <li><a href="/problems/medium/">Medium</a></li>
+						  <li><a href="/problems/hard/">Hard</a></li>
+						  <li><a href="/problems/challenge/">Challenge</a></li>
+						  <li><a href="/problems/extcontest/">Peer</a></li>
+						  <li><a href="/problems/school/">School</a></li>
+						</ul>
+					</li>
+					<li class="bignav" id="compete-nav">
+						<a href="/contests/">COMPETE</a>
+					    <ul>
+					      <!--<li class="mainsubnav"><span>Present Contests</span></li>-->
+					      <!--<li><a href="javascript:void(0)">None</a></li>-->
+						  <!--<li class="mainsubnav"><span>Future Contests</span></li>-->
+						  <li><a href="/AUGMINI/">August Mini Challenge</a></li>
+						  <li><a href="/AUG09/">August Algorithm Challenge</a></li>
+						  <li><a href="/JULY09/">July Algorithm Challenge</a></li>
+						  <li><a href="/JUNE09/">June Algorithm Challenge</a></li>
+					  	  <li><a href="/MAYGAMER/">May Gamers Challenge</a></li>
+					  	  <!--<li><a href="/MAY09/">May CodeChef Challenge</a></li>-->
+					  	  <!--<li><a href="/APRIL09/">April CodeChef Challenge</a></li>-->
+					  	  <!--<li><a href="/INSOM1/">Insomnia Speed Round</a></li>
+					  	  <li><a href="/INSOM2/">Insomnia Thought Round</a></li>-->
+						  <!--<li class="mainsubnav"><span>Past Contests</span></li>-->
+						  <!--<li><a href="/MARCH09/">March CodeChef Challenge</a></li>-->
+						</ul>
+					 </li>
+					 <li class="bignav" id="discuss-nav">
+						<a href="http://discuss.codechef.com">DISCUSS</a>
+					    <ul>
+						  <li><a href="http://discuss.codechef.com">Forums</a></li>
+						  <li><a href="http://blog.codechef.com">Blog</a></li>
+						  <li><a href="http://www.twitter.com/codechef">Twitter</a></li>
+						</ul>
+					 </li>
+					 <li class="smallnav" id="community-nav" style="border-left: 1px solid #999;">
+						<a href="/community/">COMMUNITY</a>
+						<ul>
+						  <li><a href="/techtalks/">CodeChef TechTalks</a></li>
+						  <li><a href="/meetups/">CodeChef Meetups</a></li>
+						  <li><a href="/campus_chapter/about/">Campus Chapters</a></li>
+						  <li><a href="/hostyourcontest/">Host Your Contest</a></li>
+						  <!---<li><a href="/bloggers/">Bloggers</a></li>--->
+						  <li><a href="/usergroups/">User Groups</a></li>
+						</ul>
+					</li>
+					<li class="smallnav" id="help-nav">
+						<a href="/help/">HELP</a>
+						<ul>
+						  <li><a href="http://blog.codechef.com/2009/06/29/frequently-asked-questions/">Frequently Asked Questions</a></li>
+						  <li><a href="http://blog.codechef.com/2009/07/24/faq-for-problem-setters/">FAQ for Problem Setters</a></li>
+						  <li><a href="http://blog.codechef.com/2009/07/09/tutorial-for-problem-paying-up/">Tutorial: Paying Up</a></li>
+						  <li><a href="http://blog.codechef.com/2009/07/02/tutorial-for-small-factorials/">Tutorial: Small Factorials</a></li>
+						  <li><a href="http://blog.codechef.com/2009/02/24/54/">Tutorial: Input and Output(I/O)</a></li>
+						  <li><a href="http://blog.codechef.com/2009/02/25/codechef-tutorial-your-first-non-trivial-problem/">Tutorial: Your First Non-Trivial Problem</a></li>
+						</ul>
+					</li>
+					<li class="smallnav" id="about-nav">
+						<a href="http://www.codechef.com/aboutus/">ABOUT</a>
+						<ul>	
+						  <li><a href="http://www.codechef.com/aboutus/">About CodeChef</a></li>
+						  <li><a href="http://www.directi.com/" target="_blank">About Directi</a></li>
+						  <li><a href="http://www.codechef.com/ceoscorner/">CEO's Corner</a></li>
+						  <li><a href="http://www.codechef.com/press/">Press Room</a></li>
+						  <li><a href="http://careers.directi.com/" target="_blank">Careers</a></li>
+						  
+						</ul>
+					</li>
+				</ul>
+			</div>
+						<!-- /PRIMARY NAV -->
+		</div>
+		<!-- /COLS 2 -->
+		
+		
+		<script type="text/javascript">
+		//Initialize Menu instance(s):
+		
+		ddsmoothmenu.init({
+			mainmenuid: "smoothmenu1", //menu DIV id
+			//customtheme: ["#1c5a80", "#18374a"], //override default menu CSS background values? Uncomment: ["normal_background", "hover_background"]
+			contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+		})
+		</script>
+		
+
+	</div>
+</div>
+<!-- /HEADER -->
+<center>
+<table cellpadding="10" cellspacing="0" class="maintable" id="maintable">
+<tr>
+<!-- BEGIN: CONTENT --><!-- [[POSTPROCESSING_START]] please leave this area unchanged  !-->
+<!-- 2019-11-07 -->
+<!-- [[POSTPROCESSING_END]] !-->
+<!-- [[POSTPROCESSING_START]] please leave this area unchanged  !-->
+<!-- 03 : 57 : 54 -->
+<!-- [[POSTPROCESSING_END]] !--><td class="content" width="99%">
+<script type="text/javascript" language="javascript">
+			var sys_date = "11/07/2019 03:57:54";
+			var isHome = "n";
+	  	  </script>
+<script type="text/javascript" src="/date.js"></script>
+<script type="text/javascript" src="/statustable.js"></script>
+<script type="text/javascript" src="/pretty.js"></script>
+ 
+<script type="text/javascript" language="javascript">
+function prettyLinks(){
+//        var links = document.getElementsByTagName("span");       
+//        for ( var i = 0; i < links.length; i++ )
+//                if ( links[i].title ) {
+//                		var testtitle = links[i].title;
+//                        var date = prettyDate(links[i].title);
+//                        if ( date )
+//                                links[i].innerHTML = date;
+//                }
+}
+prettyLinks();
+setInterval(prettyLinks, 50);
+
+$(document).ready(function(){
+	convertDate();
+});
+</script>
+<!-- CONTENT REGIONS -->
+<div id="content-regions" class="wrapper">
+	<div class="inner-wrapper rounded-cr-body">
+		<div class="rounded-cr-header">
+		<div class="rounded-cr-footer">
+
+					<div class="breadcrumb">
+						<p><a href="/">Home</a> &raquo; List of my problems</p>
+					</div>
+
+			<!-- PRIMARY CONTENT -->
+			<div id="primary-content" class="cols-2">
+				<div class="content-spacer">
+
+
+
+					<img src="/images/content-wrapper-bg.gif" class="content-wrapper-header">
+					<div class="content-wrapper">
+
+					<!-- CONTENT -->
+
+
+<table class="problems" width="100%">
+	<tr class="navigation">
+		<td><a href="/problems/my/" class="text-button">My own problems</a></td>
+		<td><a href="/problems/editable/" class="text-button">All editable problems</a></td>
+		<td><a href="/problems/available/" class="text-button">All available problems</a></td>
+		<td><a href="/problems/add/" class="text-button">Add problem</a></td>
+	</tr>
+</table>
+
+<H3>list of my problems</H3>
+
+<table class="problems" width="100%">
+<tr class="headerrow">
+<th width="10%" class="headerrowleft"><a href="?sort=5" title="Problem ID. Click here to sort.">ID</a></th>
+<th width="75%"><a href="?sort=2" title="Problem name. Click here to sort. Click on the name of a problem to read its description.">NAME</a></th>
+<th width="15%" class="headerrowright"><a href="?sort=1" title="Problem code. Click here to sort. If a link in this column is inactive for some problem, solutions cannot be submitted.">CODE</a></th>
+</tr>
+
+<tr class="problemrow">
+<td>20259</td>
+<td align="left">&nbsp;
+<a href="/problems/COTY04/">&nbsp;<b>CCS Bot</b></a></td>
+<td><a href="/submit/COTY04" title="Submit a solution to this problem.">
+COTY04</a></td>
+</tr>
+<tr class="problemrow">
+<td>20260</td>
+<td align="left">&nbsp;
+<a href="/problems/COTY03/">&nbsp;<b>Hackathon</b></a></td>
+<td><a href="/submit/COTY03" title="Submit a solution to this problem.">
+COTY03</a></td>
+</tr>
+<tr class="problemrow">
+<td>20261</td>
+<td align="left">&nbsp;
+<a href="/problems/COTY01/">&nbsp;<b>Fake Baba</b></a></td>
+<td><a href="/submit/COTY01" title="Submit a solution to this problem.">
+COTY01</a></td>
+</tr>
+<tr class="problemrow">
+<td>20262</td>
+<td align="left">&nbsp;
+<a href="/problems/COTY05/">&nbsp;<b>Sum of Products</b></a></td>
+<td><a href="/submit/COTY05" title="Submit a solution to this problem.">
+COTY05</a></td>
+</tr>
+<tr class="problemrow">
+<td>20263</td>
+<td align="left">&nbsp;
+<a href="/problems/COTY02/">&nbsp;<b>Playing With The Strings</b></a></td>
+<td><a href="/submit/COTY02" title="Submit a solution to this problem.">
+COTY02</a></td>
+</tr>
+<tr class="problemrow">
+<td>20294</td>
+<td align="left">&nbsp;
+<a href="/problems/COTY06/">&nbsp;<b>Charlie and the Chocolate Factory</b></a></td>
+<td><a href="/submit/COTY06" title="Submit a solution to this problem.">
+COTY06</a></td>
+</tr>
+<tr class="problemrow">
+<td>23231</td>
+<td align="left">&nbsp;
+<a href="/problems/COTY07/">&nbsp;<b>Fare Split</b></a></td>
+<td><a href="/submit/COTY07" title="Submit a solution to this problem.">
+COTY07</a></td>
+</tr>
+<tr class="problemrow">
+<td>23232</td>
+<td align="left">&nbsp;
+<a href="/problems/COTY08/">&nbsp;<b>Find the squares</b></a></td>
+<td><a href="/submit/COTY08" title="Submit a solution to this problem.">
+COTY08</a></td>
+</tr>
+<tr class="problemrow">
+<td>23234</td>
+<td align="left">&nbsp;
+<a href="/problems/COTY09/">&nbsp;<b>THE MArrayTH GAME</b></a></td>
+<td><a href="/submit/COTY09" title="Submit a solution to this problem.">
+COTY09</a></td>
+</tr>
+<tr class="problemrow">
+<td>23235</td>
+<td align="left">&nbsp;
+<a href="/problems/CE00/">&nbsp;<b>Ah-Shit-Here-We-Go-Again</b></a></td>
+<td><a href="/submit/CE00" title="Submit a solution to this problem.">
+CE00</a></td>
+</tr>
+<tr class="problemrow">
+<td>23237</td>
+<td align="left">&nbsp;
+<a href="/problems/CE11/">&nbsp;<b>The Dark Lord Returns</b></a></td>
+<td><a href="/submit/CE11" title="Submit a solution to this problem.">
+CE11</a></td>
+</tr>
+<tr class="problemrow">
+<td>23242</td>
+<td align="left">&nbsp;
+<a href="/problems/CE08/">&nbsp;<b>Graduation Picture</b></a></td>
+<td><a href="/submit/CE08" title="Submit a solution to this problem.">
+CE08</a></td>
+</tr>
+<tr class="problemrow">
+<td>23243</td>
+<td align="left">&nbsp;
+<a href="/problems/CE09/">&nbsp;<b>Day 256</b></a></td>
+<td><a href="/submit/CE09" title="Submit a solution to this problem.">
+CE09</a></td>
+</tr>
+<tr class="problemrow">
+<td>23244</td>
+<td align="left">&nbsp;
+<a href="/problems/CE10/">&nbsp;<b>String Counter</b></a></td>
+<td><a href="/submit/CE10" title="Submit a solution to this problem.">
+CE10</a></td>
+</tr>
+<tr class="problemrow">
+<td>23245</td>
+<td align="left">&nbsp;
+<a href="/problems/CE12/">&nbsp;<b>Find the squares</b></a></td>
+<td><a href="/submit/CE12" title="Submit a solution to this problem.">
+CE12</a></td>
+</tr>
+<tr class="problemrow">
+<td>23246</td>
+<td align="left">&nbsp;
+<a href="/problems/CE15/">&nbsp;<b>Mind the level </b></a></td>
+<td><a href="/submit/CE15" title="Submit a solution to this problem.">
+CE15</a></td>
+</tr>
+<tr class="problemrow">
+<td>23248</td>
+<td align="left">&nbsp;
+<a href="/problems/CE23/">&nbsp;<b>Monopoly - With a twist</b></a></td>
+<td><a href="/submit/CE23" title="Submit a solution to this problem.">
+CE23</a></td>
+</tr>
+<tr class="problemrow">
+<td>23250</td>
+<td align="left">&nbsp;
+<a href="/problems/CE233/">&nbsp;<b>Monopoly - With a twist</b></a></td>
+<td>CE233</td>
+</tr>
+<tr class="problemrow">
+<td>23251</td>
+<td align="left">&nbsp;
+<a href="/problems/CE234/">&nbsp;<b>Monopoly - With a twist</b></a></td>
+<td><a href="/submit/CE234" title="Submit a solution to this problem.">
+CE234</a></td>
+</tr>
+<tr class="problemrow">
+<td>23254</td>
+<td align="left">&nbsp;
+<a href="/problems/CE023/">&nbsp;<b>String It Up</b></a></td>
+<td><a href="/submit/CE023" title="Submit a solution to this problem.">
+CE023</a></td>
+</tr>
+<tr class="problemrow">
+<td>23255</td>
+<td align="left">&nbsp;
+<a href="/problems/CODEQT16/">&nbsp;<b> Pyromaniac</b></a></td>
+<td>CODEQT16</td>
+</tr>
+<tr class="problemrow">
+<td>23256</td>
+<td align="left">&nbsp;
+<a href="/problems/CODEQ16/">&nbsp;<b> Pyromaniac</b></a></td>
+<td><a href="/submit/CODEQ16" title="Submit a solution to this problem.">
+CODEQ16</a></td>
+</tr>
+<tr class="problemrow">
+<td>23257</td>
+<td align="left">&nbsp;
+<a href="/problems/CE16/">&nbsp;<b> Pyro</b></a></td>
+<td><a href="/submit/CE16" title="Submit a solution to this problem.">
+CE16</a></td>
+</tr>
+<tr class="problemrow">
+<td>23261</td>
+<td align="left">&nbsp;
+<a href="/problems/CE69/">&nbsp;<b>Prem with Primes</b></a></td>
+<td><a href="/submit/CE69" title="Submit a solution to this problem.">
+CE69</a></td>
+</tr>
+<tr class="problemrow">
+<td>23262</td>
+<td align="left">&nbsp;
+<a href="/problems/TESTTILE/">&nbsp;<b>MOVING TILES</b></a></td>
+<td>TESTTILE</td>
+</tr>
+<tr class="problemrow">
+<td>23274</td>
+<td align="left">&nbsp;
+<a href="/problems/CE786/">&nbsp;<b>Deception </b></a></td>
+<td><a href="/submit/CE786" title="Submit a solution to this problem.">
+CE786</a></td>
+</tr>
+<tr class="problemrow">
+<td>23279</td>
+<td align="left">&nbsp;
+<a href="/problems/CE201/">&nbsp;<b>The Due Date</b></a></td>
+<td><a href="/submit/CE201" title="Submit a solution to this problem.">
+CE201</a></td>
+</tr>
+</table>
+
+<form name="fch" class="form" style="margin-top:12px; margin-bottom:8px" action="" method="post">
+<table width="100%">
+<tr>
+    <td align=left>
+	<b>Document type:</b>
+	<input type="radio" name="pspdf" value="/" onClick="appendLink(this.value)"  checked >html
+	<input type="radio" name="pspdf" value=".ps" onClick="appendLink(this.value)"  >ps
+	<input type="radio" name="pspdf" value=".pdf" onClick="appendLink(this.value)"  >pdf
+	<noscript><input class="button" value="change" type="submit"></noscript>
+    </td>
+</tr>
+</table>
+</form>
+
+ <script language="javascript" type="text/javascript">
+<!--  
+function appendLink(target)
+{
+    for(a = 0; a < document.links.length; a++)
+	if (document.links[a].href.match(/^.*\/problems(\/[A-Z0-9_]+)?(\.[a-z]+)?\/?$/))
+	    document.links[a].href = document.links[a].href.replace(/\.[a-z]+$/, "").replace(/\/$/, "")+target;
+    document.cookie='pspdf='+target+'; path=/;';
+}
+
+appendLink('/');
+
+//--></script> 
+
+					</div>
+				</div>
+			</div>
+			<!-- /PRIMARY CONTENT -->
+			<!-- CONTENT SIDEBAR -->
+			<div id="sidebar-content" class="cols-2">
+				<div class="content-spacer">
+					<!-- BLOCK -->
+					<div class="block rounded-block">
+						<div class="rounded-b-header">
+						<div class="rounded-b-footer">
+							<h3>RECENT ACTIVITY</h3>
+							<div class="table-results" id="statusdiv">
+								<center><img src="/images/ajax-loader.gif" /> Loading Recent Activity...</center>
+							</div>
+						</div>
+						</div>
+					</div>
+					<!-- /BLOCK -->
+					<!-- BLOCK -->
+					<div class="block">
+						<h6><img src="/images/h6-recent-news-feed.gif"></h6>
+						<div id="codechef_newsfeed_blurb">
+													</div>
+					</div>
+					<!-- /BLOCK -->
+				</div>
+			</div>
+			<!-- /CONTENT SIDEBAR -->
+		</div>
+		</div>
+	</div>
+</div>
+<!-- /CONTENT REGIONS --><!-- /END: CONTENT -->
+</td>
+</tr>
+</table>
+</center>
+<!-- FOOTER -->
+<div id="footer" class="wrapper">
+	<div class="inner-wrapper">
+		<!-- SECOND NAV -->
+		<div class="cols-2">
+			<div id="secondary-nav">
+								
+					
+									<ul>
+						<li><a href="/problems/my">problem&nbsp;list</a></li>
+					</ul>
+						
+								<ul style="margin-top:10px;">
+					<li><a href="http://www.codechef.com/aboutus/">About CodeChef</a></li>
+					<li><a href="http://www.directi.com/" target="_blank">About Directi</a></li>
+					<li><a href="http://www.codechef.com/ceoscorner/">CEO's Corner</a></li>
+					<li><a href="http://careers.directi.com/" target="_blank">Careers</a></li>
+					<li><a href="mailto:feedback@codechef.com">feedback@codechef.com</a></li>
+														</ul>
+				<!--<ul>
+					<li><a href="http://www.codechef.com/campus/">CodeChef Campus Chapters</a></li>
+					<li><a href="http://www.codechef.com/bloggers/">Blogger Community Program</a></li>
+					<li><a href="http://www.codechef.com/usergroups/">User Group Outreach Program</a></li>
+				</ul>-->
+			</div>
+			<div id="fineprint">
+				<p>&copy; 2009 <a style="color:#000000;" href="http://www.directi.com">Directi Group</a>.  All Rights Reserved.  CodeChef uses SPOJ &copy; by <a style="color:#000000;" href="http://www.sphere-research.com">Sphere Research Labs</a></p>
+			</div>
+			
+		</div>
+		<!-- /SECOND NAV -->
+
+		<!-- LEGAL & COPYRIGHT -->
+		<div class="cols-2">
+			<div id="sponsor-strip">
+				<a href="http://www.directi.com" target="_blank"><img src="/images/footer-sponsor-strip.gif" alt="Sponsors" /></a><br />
+				<span>The time now is: <span id="server-time"></span></span>
+				<script language='javascript'>
+						formatTime('November 07, 2019 03:57:54');
+					</script>			</div>
+		</div>
+		<!-- /LEGAL & COPYRIGHT -->
+	</div>
+</div>
+<!-- /FOOTER -->
+
+<br style="clear:both;">
+<script type="text/javascript">
+var allPageTags = new Array(); 
+function doSomethingWithClasses(theClass) {
+	var allPageTags=document.getElementsByTagName("*");
+	for (i=0; i<allPageTags.length; i++) {
+		if (allPageTags[i].className==theClass) {
+			document.write('<style type=\"text/css\">@import url(/images/qfix.css);</style>');
+		}
+	}
+}
+doSomethingWithClasses('cc-activation-text');doSomethingWithClasses('cc-error-text');
+</script>
+<!--
+<script src="http://widgets.directi.com/codechef/?excerpt=true&excerptcount=80&itemcount=4&containerid=codechef_newsfeed_blurb" type="text/javascript"></script>
+-->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-53602-42");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+</body>
+</html>
